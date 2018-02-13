@@ -100,22 +100,36 @@ public class FacebookNativeAd extends BaseAd.BaseNativeAd {
 
     @Override
     public void registerView(View container, List<View> viewList) {
-        this.nativeAd.registerViewForInteraction(container, viewList);
+        synchronized (this) {
+            this.nativeAd.registerViewForInteraction(container, viewList);
+        }
     }
 
     @Override
     public String getTitle() {
-        return this.nativeAd != null ? this.nativeAd.getAdTitle() : null;
+        String title;
+        synchronized (this) {
+            title = this.nativeAd != null ? this.nativeAd.getAdTitle() : null;
+        }
+        return title;
     }
 
     @Override
     public String getBody() {
-        return this.nativeAd != null ? this.nativeAd.getAdBody() : null;
+        String body;
+        synchronized (this) {
+            body = this.nativeAd != null ? this.nativeAd.getAdBody() : null;
+        }
+        return body;
     }
 
     @Override
     public String getAction() {
-        return this.nativeAd != null ? this.nativeAd.getAdCallToAction() : null;
+        String action;
+        synchronized (this) {
+            action = this.nativeAd != null ? this.nativeAd.getAdCallToAction() : null;
+        }
+        return action;
     }
 
     @Override
@@ -125,12 +139,20 @@ public class FacebookNativeAd extends BaseAd.BaseNativeAd {
 
     @Override
     public String getCover() {
-        return this.nativeAd != null ? this.nativeAd.getAdCoverImage().getUrl() : null;
+        String cover;
+        synchronized (this) {
+            cover = this.nativeAd != null ? this.nativeAd.getAdCoverImage().getUrl() : null;
+        }
+        return cover;
     }
 
     @Override
     public String getSocialContext() {
-        return this.nativeAd != null ? this.nativeAd.getAdSocialContext() : null;
+        String context;
+        synchronized (this) {
+            context = this.nativeAd != null ? this.nativeAd.getAdSocialContext() : null;
+        }
+        return context;
     }
 
     @Override

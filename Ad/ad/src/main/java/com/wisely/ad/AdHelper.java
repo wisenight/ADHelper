@@ -89,6 +89,9 @@ public abstract class AdHelper implements IAdLoader.Callback {
             Log.d(LOG_TAG, "pushAD: " + this);
         }
         if (ad == null || !ad.isValid()) {
+            if (ad != null) {
+                ad.destroy();
+            }
             return;
         }
         synchronized (this) {
